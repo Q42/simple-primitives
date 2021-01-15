@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Simple Primitives</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" type="image/png" href="media/logo-inverted.png">
+
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/misc.css">
+  <link rel="stylesheet" href="css/editor.css">
+  <link rel="stylesheet" href="css/shapes.css">
+</head>
+
+<body>
+  <script src="./bootstrap.js"></script>
+
+  <div class="navbar">
+    <ul>
+      <li class="image-container"><img class="image-fit-parent" src="media/logo-inverted.png"></li>
+      <li><a id="navbar-shapes">Shapes</a></li>
+      <li><a id="navbar-about">About</a></li>
+      <li><a id="navbar-how-to-use">How To Use</a></li>
+      <li><a id="navbar-editor">Editor</a></li>
+    </ul>
+  </div>
+
+  <div class="header">
+    <img class="logo" src="media/logo-orange.png">
+    <h1>Simple Primitives</h1>
+    <p class="subtitle">A simple editor to make shapes</p>
+  </div>
+
+  <div class="shapes" id="shapes">
+    <h2>Shapes</h2>
+
+    <div class="shapes-container">
+      <div class="shape-item" id="shapes-plane">
+        <img class="image-fit-parent" src="media/Plane.jpg">
+        <h3>Plane</h3>
+        <p>Scale, Subdivisions</p>
+      </div>
+      <div class="shape-item" id="shapes-disk">
+        <img class="image-fit-parent" src="media/Disk.jpg">
+        <h3>Disk</h3>
+        <p>Radius, Sides</p>
+      </div>
+      <div class="shape-item" id="shapes-cube">
+        <img class="image-fit-parent" src="media/Cube.jpg">
+        <h3>Cube</h3>
+        <p>Scale, Subdivisions</p>
+      </div>
+      <div class="shape-item" id="shapes-sphere">
+        <img class="image-fit-parent" src="media/Sphere.jpg">
+        <h3>Sphere</h3>
+        <p>Scale, Subdivisions</p>
+      </div>
+      <div class="shape-item" id="shapes-cylinder">
+        <img class="image-fit-parent" src="media/Cylinder.jpg">
+        <h3>Cylinder</h3>
+        <p>Scale, Radius, Sides</p>
+      </div>
+      <div class="shape-item" id="shapes-tube">
+        <img class="image-fit-parent" src="media/Tube.jpg">
+        <h3>Tube</h3>
+        <p>Scale, Sides, Inner Radius, Outer Radius</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="about" id="about">
+    <h2>About</h2>
+    <p>
+      Hi there! My name is Floris and I made this website during an internship at Q42 in 2020. I came up to this idea
+      with my intership coach when I told him about a challenge that I had during my previous intership at Q42. During
+      this internship I was working on a VR application in Unity3D. The content that the user could view trough his VR
+      goggle needed to be projected on the inside of a sphere so that you could view it 360. The problem was that the
+      standard sphere, that Unity3D provided, was a spherified cube. This shape isn't ideal for VR application because
+      the surface distance error caused some image artifacts near the poles. The ideal sphere for VR applications is a
+      "icosahedron" where the triangles are
+      distributed more evenly and thus has image artifacts to a lesser degree. So I needed to have an "icosahedron".
+      Unity3D doesn't provide this in it's standard library so I needed to find one on the internet or make it with a
+      program like Blender. I decided to simply Google it. This whas not very straight forward. I downloaded a free
+      basketball shape and ripped the geometry from it to use for my sphere. And this let me thinking about why the process
+      of getting a shape with a specific geometry is so hard. Why isn't there an online simple tool that let you make
+      such a shape? The rest is history.
+    </p>
+  </div>
+
+  <div class="how-to-use" id="how-to-use">
+    <h2>How To Use</h2>
+
+    <p>
+      Just simply choose a shape under the "shapes" header, or from the dropdown menu in the "editor". The configuration
+      options
+      are displayed left of the shape. Export format is currently only available in .OBJ :)
+    </p>
+  </div>
+
+  <div class="editor" id="editor">
+    <div class="right" id="canvasParent">
+      <canvas class="canvas" id="canvas">
+        Sorry, your browser doesn't support the &lt;canvas&gt; element.
+      </canvas>
+    </div>
+
+    <div class="left">
+      <div class="section">
+        <div class="ui-container">
+          <div class="ui-item">
+            <label>
+              Shape
+            </label>
+          </div>
+
+          <div class="ui-item">
+            <select name="shapes" id="dropdown-shapes">
+              <option value="plane">Plane</option>
+              <option value="disk">Disk</option>
+              <option value="cube">Cube</option>
+              <option value="sphere">Sphere</option>
+              <option value="cylinder">Cylinder</option>
+              <option value="tube">Tube</option>
+            </select>
+          </div>
+
+          <br>
+          <br>
+          <br>
+
+          <div class="ui-item">
+            <label>
+              Scale
+            </label>
+          </div>
+
+          <div class="ui-item"></div>
+
+          <div class="ui-item" id="scaleX">
+            <label>
+              X
+            </label>
+          </div>
+          <div class="ui-item" id="scaleX">
+            <input id="inputScaleX" type="number" value="1">
+          </div>
+
+          <div class="ui-item" id="scaleY">
+            <label>
+              Y
+            </label>
+          </div>
+          <div class="ui-item" id="scaleY">
+            <input id="inputScaleY" type="number" value="1">
+          </div>
+
+          <div class="ui-item" id="scaleZ">
+            <label>
+              Z
+            </label>
+          </div>
+          <div class="ui-item" id="scaleZ">
+            <input id="inputScaleZ" type="number" value="1">
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="ui-container">
+          <div class="ui-item subdivisions">
+            <label>
+              Subdivisions
+            </label>
+          </div>
+          <div class="ui-item subdivisions">
+            <input id="inputSubdivisions" type="number" value="5">
+          </div>
+
+          <div class="ui-item radius">
+            <label>
+              Radius
+            </label>
+          </div>
+          <div class="ui-item radius">
+            <input id="inputRadius" type="number" value="1">
+          </div>
+
+          <div class="ui-item sides">
+            <label>
+              Sides
+            </label>
+          </div>
+          <div class="ui-item sides">
+            <input id="inputSides" type="number" value="10">
+          </div>
+
+          <div class="ui-item innerRadius">
+            <label>
+              Inner Radius
+            </label>
+          </div>
+          <div class="ui-item innerRadius">
+            <input id="inputInnerRadius" type="number" value=".8">
+          </div>
+
+          <div class="ui-item outerRadius">
+            <label>
+              Outer Radius
+            </label>
+          </div>
+          <div class="ui-item outerRadius">
+            <input id="inputOuterRadius" type="number" value="1">
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="ui-container">
+          <div class="ui-item">
+            <button type="button" id="btnGenerate">Generate</button><br>
+          </div>
+          <div class="ui-item">
+            <button type="button" id="btnExport">Export</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>
+      Simple Primitives - Made with love at <a class="orange-link" href="https://www.q42.nl/en/">Q42</a>
+    </p>
+  </div>
+</body>
+
+</html>
